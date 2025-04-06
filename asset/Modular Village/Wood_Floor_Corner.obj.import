@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://e84p7ge74f7s"
+path="res://.godot/imported/Wood_Floor_Corner.obj-6c959d499438076c18b2554370a6241d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Wood_Floor_Corner.obj-6c959d499438076c18b2554370a6241d.mesh"]
+
+source_file="res://asset/Modular Village/Wood_Floor_Corner.obj"
+dest_files=["res://.godot/imported/Wood_Floor_Corner.obj-6c959d499438076c18b2554370a6241d.mesh", "res://.godot/imported/Wood_Floor_Corner.obj-6c959d499438076c18b2554370a6241d.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

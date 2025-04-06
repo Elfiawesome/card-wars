@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dxyeniw875pxf"
+path="res://.godot/imported/Stucco_Window_Rounded_Narrow.obj-57c07b0e636b386754ffbce8f45dfc25.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Stucco_Window_Rounded_Narrow.obj-57c07b0e636b386754ffbce8f45dfc25.mesh"]
+
+source_file="res://asset/Modular Village/Stucco_Window_Rounded_Narrow.obj"
+dest_files=["res://.godot/imported/Stucco_Window_Rounded_Narrow.obj-57c07b0e636b386754ffbce8f45dfc25.mesh", "res://.godot/imported/Stucco_Window_Rounded_Narrow.obj-57c07b0e636b386754ffbce8f45dfc25.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

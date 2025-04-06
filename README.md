@@ -1,1 +1,1 @@
-Card Wars
+Card Wars Project
