@@ -25,10 +25,6 @@ func run(server: Server, client: Server.ClientBase, data: Array) -> void:
 	battle.connected_clients.push_back(client.id)
 	client.send_data("ActivateBattleView", [])
 	
-	var batch_builder := ActionBatchBuilder.get_builder("CreateBattlefield")
-	var batch := batch_builder.create()
-	battle.commit_action_batch(batch)
-
 
 func validate_data(data: Array) -> bool:
 	if data.size() != 1: return false
