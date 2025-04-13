@@ -25,6 +25,9 @@ func run(server: Server, client: Server.ClientBase, data: Array) -> void:
 	battle.connected_clients.push_back(client.id)
 	client.send_data("ActivateBattleView", [])
 	
+	battle.commit_intent(
+		"example"
+	)
 
 func validate_data(data: Array) -> bool:
 	if data.size() != 1: return false
