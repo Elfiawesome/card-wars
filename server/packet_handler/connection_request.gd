@@ -20,14 +20,28 @@ func run(server: Server, client: Server.ClientBase, data: Array) -> void:
 	client.id = hash_id
 	client.state = client.State.PLAY
 	
-	# Send this player into a battle
-	var battle := server.battle_manager.create_battle()
+	# Create Battle
+	var battle: BattleLogic
+	if server.battle_manager._battles.is_empty():
+		battle = server.battle_manager.create_battle()
+	else:
+		battle = server.battle_manager._battles.get(server.battle_manager._battles.keys()[0])
+	
+	# Add client id into the connected clients for networking broadcasting
+	var player := battle.PlayerInstance.new(battle.generate_id(), battle)
+	battle.player_instance[player.id] = player
+	player.client_id = client.id
+	battle.player_order.push_back(player.id)
+	# Add client id into the connected clients for networking broadcasting
 	battle.connected_clients.push_back(client.id)
+	
+	# Send this player into a battle
 	client.send_data("ActivateBattleView", [])
 	
-	battle.commit_intent(
-		"example"
-	)
+	battle.commit_intent("CreateBattlefield", {
+		"controlling_players": [],
+		"heroes": []
+	})
 
 func validate_data(data: Array) -> bool:
 	if data.size() != 1: return false
