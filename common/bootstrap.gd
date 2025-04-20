@@ -7,6 +7,7 @@ func _ready() -> void:
 
 func register_client() -> void:
 	PacketHandlerClient.register()
+	AnimationClip.register()
 
 func register_server() -> void:
 	PacketHandlerServer.register()

@@ -18,27 +18,10 @@ func run() -> void:
 	
 	var _r := battle_logic.commit_action_item(BattleIntent.wrap_in_batch(
 		[BattleIntent.create_action("AttachUnitSlotToBattlefield", {
-			"battlefield_id": battlefield_id,
-			"unit_slot_layout": unit_slot_layout,
+				"battlefield_id": battlefield_id,
+				"unit_slot_layout": unit_slot_layout,
 		})],
 		BattleIntent.create_animation("UnitSlotLayoutAnimate")
 	))
-	
-	
-	
-	var _r2 := battle_logic.commit_action_item(
-		BattleIntent.wrap_in_batch(
-			[
-				BattleIntent.create_action("Action"),
-				BattleIntent.create_action("Action"),
-				BattleIntent.wrap_in_batch([
-					BattleIntent.create_action("SubAction"),
-					BattleIntent.create_action("SubAction")
-				]),
-				BattleIntent.create_action("Action")
-			],
-			BattleIntent.create_animation("AnimationClip", {"AnimateData":"Test"})
-		)
-	)
 	
 	complete_intent()

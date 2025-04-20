@@ -95,6 +95,6 @@ static func add_batch_action(batch: Dictionary, action: Dictionary) -> void:
 
 static func create_animation(animation_type: String, animation_args: Dictionary = {}) -> Dictionary:
 	return {
-		"AnimationType": animation_type,
-		"AnimationArgs": animation_args
+		"Type": animation_type,
+		"Args": animation_args
 	}

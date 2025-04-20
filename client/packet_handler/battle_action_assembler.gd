@@ -18,7 +18,7 @@ func run(game: GameSession, data: Array) -> void:
 		var completed_batch: Dictionary = pending_batches.pop_back()
 		if !pending_batches.is_empty():
 			var last_item: Dictionary = pending_batches[-1]
-			var list:Array = last_item.get("List", []) as Array
+			var list: Array = last_item.get("List", []) as Array
 			list.push_back(completed_batch)
 		else:
 			# Complete batch to system
@@ -40,5 +40,3 @@ func run(game: GameSession, data: Array) -> void:
 
 func handle_action_item(game: GameSession, action_item: Dictionary) -> void:
 	game.battle_view.action_item_queue.push_back(action_item)
-	print("=")
-	print(JSON.stringify(game.battle_view.action_item_queue))
