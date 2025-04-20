@@ -20,7 +20,7 @@ static func create(battle_logic_: BattleLogic, intent_type: String, intent_data:
 
 func run() -> void:
 	pass
-func callback(callback_data: Dictionary) -> void:
+func callback(_callback_data: Dictionary) -> void:
 	# Run when the client sends back any input to continue
 	pass
 func request_client_input() -> void:

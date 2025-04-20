@@ -12,7 +12,7 @@ var player_order: Array[String] = []
 func _init(network_bus_: Server.NetworkBus) -> void:
 	network_bus = network_bus_
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	_handle_intent_queue()
 
 func create_battlefield() -> String:
@@ -41,7 +41,7 @@ func _handle_intent_queue() -> void:
 	if current_intent != null:
 		if current_intent.is_finished:
 			current_intent = null
-func _handle_action_item(item: Dictionary, parent_batch_id: int = -1) -> Array:
+func _handle_action_item(item: Dictionary) -> Array:
 	var action_results: Array = []
 	var block := BattleIntent.get_action_item_block_type(item)
 	

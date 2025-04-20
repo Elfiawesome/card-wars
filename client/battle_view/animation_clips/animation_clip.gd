@@ -56,5 +56,5 @@ func animation_end() -> void:
 	
 	if _paused or _has_ended: return
 	_has_ended = true
-	trigger_end.emit(self)
+	trigger_end.emit()
 	queue_free()

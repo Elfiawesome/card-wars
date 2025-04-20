@@ -1,13 +1,12 @@
 class_name BattleView extends CanvasLayer
 
-@onready var animation_handler: AnimationHandler = $AnimationHandler
 var action_item_queue: Array[Dictionary] = []
 var animation_clip_queue: Array[AnimationClip] = []
 
 func _ready() -> void:
 	pass
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !action_item_queue.is_empty():
 		var action_item: Dictionary = action_item_queue.pop_front()
 		handle_action_item(action_item)
@@ -33,7 +32,7 @@ func handle_action_batch(batch: Dictionary) -> void:
 	animation_clip.args = animation_args
 	animation_clip.trigger_keyframe.connect(handle_action_item)
 	animation_clip.trigger_end.connect(
-		func(animation_clip: AnimationClip) -> void:
+		func() -> void:
 			animation_clip_queue.remove_at(animation_clip_queue.size()-1)
 			if animation_clip_queue.size() > 0:
 				animation_clip_queue[-1].start()

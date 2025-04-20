@@ -1,13 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://4h2msi18pfcj"]
+[gd_scene load_steps=2 format=3 uid="uid://4h2msi18pfcj"]
 
 [ext_resource type="Script" uid="uid://x4k3u56852hk" path="res://client/battle_view/battle_view.gd" id="1_cw8vw"]
-[ext_resource type="Script" uid="uid://j58h3ie50acp" path="res://client/battle_view/animation_handler.gd" id="2_8n4ru"]
 
 [node name="BattleView" type="CanvasLayer"]
 script = ExtResource("1_cw8vw")
-
-[node name="AnimationHandler" type="Node" parent="."]
-script = ExtResource("2_8n4ru")
 
 [node name="Panel" type="Panel" parent="."]
 anchors_preset = 15
