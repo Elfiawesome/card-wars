@@ -12,19 +12,19 @@ func _process(_delta: float) -> void:
 		handle_action_item(action_item)
 
 func handle_action_item(action_item: Dictionary) -> void:
-	var block: String = action_item.get("Block", "")
-	if block == "Batch":
+	var block := BattleActions.get_item_block_type(action_item)
+	if block == BattleActions.BLOCK_TYPE.BATCH:
 		handle_action_batch(action_item)
-	elif block == "Action":
-		var type: String = action_item.get("Type")
-		var data: Dictionary = action_item.get("Data", {}) as Dictionary
+	elif block == BattleActions.BLOCK_TYPE.ACTION:
+		var type := BattleActions.get_action_type(action_item)
+		var data := BattleActions.get_action_data(action_item)
 		_print_debug("Processing Action: %s - %s" % [type, data])
 
 func handle_action_batch(batch: Dictionary) -> void:
-	var list: Array = batch.get("List", []) as Array
-	var animation: Dictionary = batch.get("Animation", {}) as Dictionary
-	var animation_type: String = animation.get("Type", {}) as String
-	var animation_args: Dictionary = animation.get("Args", {}) as Dictionary
+	var list := BattleActions.get_batch_list(batch)
+	var animation := BattleActions.get_batch_animation(batch)
+	var animation_type := BattleActions.get_animation_type(animation)
+	var animation_args := BattleActions.get_animation_args(animation)
 	
 	# Create a new animation clip
 	var animation_clip := AnimationClip.get_animation_clip(animation_type)

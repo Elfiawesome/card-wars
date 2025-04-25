@@ -1,6 +1,9 @@
 extends BattleActionHandler
 
 func handle_as_client(_battle_view: BattleView, _action_data: Dictionary) -> void:
+	# TODO CLIENT SIDE HERE 
+	# ADD THE UNIT CARD SLOT ANIMATION TO BATTLEFIELD HERE 
+	# LAST LEFT OFF HERE
 	pass
 
 func handle_as_server(battle_logic: BattleLogic, action_data: Dictionary) -> Dictionary:

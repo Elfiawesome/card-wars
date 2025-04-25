@@ -43,23 +43,22 @@ func _handle_intent_queue() -> void:
 			current_intent = null
 func _handle_action_item(item: Dictionary) -> Array:
 	var action_results: Array = []
-	var block := BattleIntent.get_action_item_block_type(item)
-	
-	if block == BattleIntent.ACTION_ITEM_BLOCK_TYPE.BATCH:
-		var animation := BattleIntent.get_batch_animation(item)
+	var block := BattleActions.get_item_block_type(item)
+	if block == BattleActions.BLOCK_TYPE.BATCH:
+		var animation := BattleActions.get_batch_animation(item)
 		if animation:
-			network_bus.broadcast_specific_data(connected_clients, "BattleActionAssembler", ["BatchStart", animation])
+			network_bus.broadcast_specific_data(connected_clients, "battle_action_assembler", [BattleActions.BATCH_START_CODE, animation])
 		else:
-			network_bus.broadcast_specific_data(connected_clients, "BattleActionAssembler", ["BatchStart"])
-		for sub_item: Dictionary in BattleIntent.get_batch_list(item):
+			network_bus.broadcast_specific_data(connected_clients, "battle_action_assembler", [BattleActions.BATCH_START_CODE])
+		for sub_item: Dictionary in BattleActions.get_batch_list(item):
 			var action_result := _handle_action_item(sub_item)
 			action_results.push_back(action_result)
-		network_bus.broadcast_specific_data(connected_clients, "BattleActionAssembler", ["BatchEnd"])
+		network_bus.broadcast_specific_data(connected_clients, "battle_action_assembler", [BattleActions.BATCH_END_CODE])
 		
-	elif block == BattleIntent.ACTION_ITEM_BLOCK_TYPE.ACTION:
-		var action_type := BattleIntent.get_action_type(item)
-		var action_data := BattleIntent.get_action_data(item)
-		var recipients := BattleIntent.get_action_recipients(item)
+	elif block == BattleActions.BLOCK_TYPE.ACTION:
+		var action_type := BattleActions.get_action_type(item)
+		var action_data := BattleActions.get_action_data(item)
+		var recipients := BattleActions.get_action_recipients(item)
 		
 		var battle_action_handler := BattleActionHandler.get_battle_action_handler(action_type)
 		if battle_action_handler:
@@ -67,10 +66,10 @@ func _handle_action_item(item: Dictionary) -> Array:
 			action_results = [action_result]
 			if recipients.is_empty():
 				# Tell everyone about this action
-				network_bus.broadcast_specific_data(connected_clients, "BattleActionAssembler", ["Action", action_type, action_data])
+				network_bus.broadcast_specific_data(connected_clients, "battle_action_assembler", [BattleActions.ACTION_CODE, action_type, action_data])
 			else:
 				# Tell only that person about this action
-				network_bus.broadcast_specific_data(recipients, "BattleActionAssembler", ["Action", action_type, action_data])
+				network_bus.broadcast_specific_data(recipients, "battle_action_assembler", [BattleActions.ACTION_CODE, action_type, action_data])
 	
 	return action_results
 func commit_action_item(action_item: Dictionary) -> Array:

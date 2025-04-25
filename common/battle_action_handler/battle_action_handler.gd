@@ -3,7 +3,7 @@ class_name BattleActionHandler extends RefCounted
 static var REGISTRY := RegistrySimple.new()
 
 static func register() -> void:
-	REGISTRY._register_all_objects_in_folder("res://common/battle_action_handler/", 1)
+	REGISTRY.register_all_objects_in_folder("res://common/battle_action_handler/", 1)
 
 static func get_battle_action_handler(action_handler_type: String) -> BattleActionHandler:
 	return REGISTRY.get_object(action_handler_type)

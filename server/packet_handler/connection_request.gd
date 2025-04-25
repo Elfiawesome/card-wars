@@ -36,9 +36,9 @@ func run(server: Server, client: Server.ClientBase, data: Array) -> void:
 	battle.connected_clients.push_back(client.id)
 	
 	# Send this player into a battle
-	client.send_data("ActivateBattleView", [])
+	client.send_data("activate_battle_view", [])
 	
-	battle.commit_intent("CreateBattlefield", {
+	battle.commit_intent("create_battlefield", {
 		"controlling_players": [],
 		"heroes": []
 	})

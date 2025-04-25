@@ -62,7 +62,7 @@ class NetworkConnectionIntegrated extends NetworkConnectionBase:
 		server.take_client_connection(client)
 		client.packet_sent.connect(_on_packet_received)
 		username = username_
-		client.packet_received.emit("ConnectionRequest", [username])
+		client.packet_received.emit("connection_request", [username])
 	
 	func send_data(type: String, data: Array = []) -> void:
 		client.packet_received.emit(type, data)
@@ -97,7 +97,7 @@ class NetworkConnectionServer extends NetworkConnectionBase:
 	
 	func disconnect_from_server(disconnect_reason: String = "Unknown disconnected by server.") -> void:
 		var disconnect_data := {"reason": disconnect_reason}
-		packet_received.emit("ForceDisconnect", [disconnect_data])
+		packet_received.emit("force_disconnect", [disconnect_data])
 		leave_server()
 	
 	func leave_server() -> void:

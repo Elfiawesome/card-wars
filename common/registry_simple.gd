@@ -10,22 +10,16 @@ func get_object(name: String) -> Object:
 
 # TODO: WARNING: remove all instances of _register and register them manually on release
 # Unless I want the game to be moddable which would be kinda cool i guess
-func _register_all_objects_in_folder(folder: String, instance_load_type: int = 0) -> void:
+# EDIT: Nah nevermind i think i want this
+func register_all_objects_in_folder(folder: String, instance_load_type: int = 0) -> void:
 	for file_path in ResourceLoader.list_directory(folder):
-		var pascal_name := _snake_to_pascal(file_path.split(".")[0])
+		var id := file_path.split(".")[0]
 		var object := ResourceLoader.load(folder + "/" + file_path)
 		if instance_load_type == 0:
-			register_object(pascal_name, object)
+			register_object(id, object)
 		elif instance_load_type == 1:
 			if object is GDScript:
-				register_object(pascal_name, object.new())
-func _snake_to_pascal(snake_string: String) -> String:
-	var components: PackedStringArray = snake_string.split("_")
-	var pascal_string: String = ""
-	for word in components:
-		if !word.is_empty():
-			pascal_string += word[0].to_upper() + word.substr(1)
-	return pascal_string
+				register_object(id, object.new())
 
 func register_object(name: String, object: Variant) -> void:
 	_map.set(name, object)

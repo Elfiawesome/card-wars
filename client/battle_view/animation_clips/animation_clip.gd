@@ -12,13 +12,13 @@ var args: Dictionary
 static var REGISTRY := RegistrySimple.new()
 
 static func register() -> void:
-	REGISTRY._register_all_objects_in_folder("res://client/battle_view/animation_clips/")
+	REGISTRY.register_all_objects_in_folder("res://client/battle_view/animation_clips/")
 
 static func get_animation_clip(animation_clip_type: String) -> AnimationClip:
 	var gdscript: GDScript = REGISTRY.get_object(animation_clip_type)
 	if gdscript:
 		return gdscript.new()
-	return
+	return AnimationClip.new()
 
 func _init() -> void:
 	pass

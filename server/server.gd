@@ -81,8 +81,8 @@ class ClientBase extends Node:
 	
 	func force_disconnect(disconnect_reason: String = "Unknown disconnected by server.") -> void:
 		var disconnect_data := {"reason": disconnect_reason}
-		send_data("ForceDisconnect", [disconnect_data])
-		packet_received.emit("ConnectionLost", [disconnect_data])
+		send_data("force_disconnect", [disconnect_data])
+		packet_received.emit("connection_lost", [disconnect_data])
 		queue_free()
 	
 	func send_data(_type: String, _data: Array = []) -> void: pass
@@ -101,7 +101,7 @@ class ClientConnection extends ClientBase:
 		stream_peer = connection
 		packet_peer = PacketPeerStream.new()
 		packet_peer.stream_peer = stream_peer
-		send_data("InitRequest")
+		send_data("init_request")
 	
 	func force_disconnect(disconnect_reason: String = "Unknown disconnected by server.") -> void:
 		super.force_disconnect(disconnect_reason)

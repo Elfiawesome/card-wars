@@ -7,31 +7,25 @@ func run(game: GameSession, data: Array) -> void:
 	if true: pass
 	var t: String = data[0]
 	
-	if t == "BatchStart":
-		var new_batch := {
-			"Block": "Batch",
-			"List": []
-		}
-		if data.size() > 1: new_batch["Animation"] = data[1]
+	if t == BattleActions.BATCH_START_CODE:
+		var new_batch := BattleActions.create_batch()
+		if data.size() > 1: BattleActions.set_batch_animation(new_batch, data[1])
 		pending_batches.push_back(new_batch)
-	elif t == "BatchEnd":
+	elif t == BattleActions.BATCH_END_CODE:
 		var completed_batch: Dictionary = pending_batches.pop_back()
 		if !pending_batches.is_empty():
+			# Get the parent batch as 'last_item'
 			var last_item: Dictionary = pending_batches[-1]
-			var list: Array = last_item.get("List", []) as Array
+			var list := BattleActions.get_batch_list(last_item)
 			list.push_back(completed_batch)
 		else:
 			# Complete batch to system
 			handle_action_item(game, completed_batch)
-	elif t == "Action":
-		var action := {
-			"Block": "Action",
-			"Type": data[1],
-			"Data": data[2]
-		}
+	elif t == BattleActions.ACTION_CODE:
+		var action := BattleActions.create_action(data[1], data[2])
 		if !pending_batches.is_empty():
 			var last_item: Dictionary = pending_batches[-1]
-			var list:Array = last_item.get("List", []) as Array
+			var list := BattleActions.get_batch_list(last_item)
 			list.push_back(action)
 		else:
 			# Complete single aciton to system
