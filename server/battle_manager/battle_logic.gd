@@ -4,6 +4,7 @@ var network_bus: Server.NetworkBus
 var connected_clients: Array = []
 var intent_queue: Array[BattleIntent] = []
 var current_intent: BattleIntent
+var global_battle_event_bus: EventBus = EventBus.new()
 var player_instance: Dictionary[String, PlayerInstance] = {}
 var battlefields: Dictionary[String, Battlefield] = {}
 var unit_slots: Dictionary[String, UnitSlot] = {}
@@ -97,3 +98,35 @@ class Battlefield extends Base:
 class UnitSlot extends Base:
 	var battlefield_id: String
 	var coords: Array[int] = []
+class Unit extends Base:
+	pass
+class Hero extends Base:
+	pass
+class Ability:
+	pass
+
+class EventBus:
+	var _subscriptions: Dictionary[String, Array] = {}
+	func subscribe(event_type: String, callable: Callable) -> void:
+		if !_subscriptions.has(event_type):
+			_subscriptions[event_type] = []
+		var subs: Array = _subscriptions[event_type]
+		# Avoid duplicate subscriptions
+		for sub: Callable in subs:
+			if sub == callable:
+				print("Tried to subscribe the same callable to the same event")
+				return
+		subs.push_back(callable)
+	
+	func unsubscribe(event_type: String, callable: Callable) -> void:
+		if _subscriptions.has(event_type):
+			var subs: Array = _subscriptions[event_type]
+			if callable in subs:
+				subs.erase(callable)
+	
+	func publish(event_type: String, event_data: Dictionary) -> void:
+		if _subscriptions.has(event_type):
+			var subs: Array = _subscriptions[event_type]
+			for sub: Callable in subs:
+				if sub.is_valid():
+					sub.call(event_data)
