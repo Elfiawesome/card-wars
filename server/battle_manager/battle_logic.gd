@@ -51,9 +51,17 @@ func _handle_response(client_id: String, response_data: Array) -> void:
 	var player: PlayerInstance = player_instance[player_instance_id]
 	if response_data.size() < 1: return
 	var response_type :String = response_data[0]
+	
+	# Handlers without limit response
 	match response_type:
-		"end_turn":
-			commit_intent("advance_turn")
+		"do_somehting": pass
+	
+	# Handlers with limit response
+	if player_response_limited:
+		if !(player_instance_id in allowed_player_responses): return
+		match response_type:
+			"end_turn":
+				commit_intent("advance_turn")
 
 # Intent & Action Item
 func _handle_intent_queue() -> void:
