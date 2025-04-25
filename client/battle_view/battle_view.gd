@@ -1,16 +1,23 @@
 class_name BattleView extends CanvasLayer
 
+@onready var debug_label: Label = $Panel/DebugLabel
+
+var network_connection: GameSession.NetworkConnectionBase
 var action_item_queue: Array[Dictionary] = []
 var animation_clip_queue: Array[AnimationClip] = []
 
 func _ready() -> void:
 	pass
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.pressed and event.keycode == KEY_ENTER:
+			network_connection.send_data("battle_client_response", ["end_turn"])
+
 func _process(_delta: float) -> void:
 	if !action_item_queue.is_empty():
 		var action_item: Dictionary = action_item_queue.pop_front()
 		handle_action_item(action_item)
-
 func handle_action_item(action_item: Dictionary) -> void:
 	var block := BattleActions.get_item_block_type(action_item)
 	if block == BattleActions.BLOCK_TYPE.BATCH:
@@ -18,8 +25,12 @@ func handle_action_item(action_item: Dictionary) -> void:
 	elif block == BattleActions.BLOCK_TYPE.ACTION:
 		var type := BattleActions.get_action_type(action_item)
 		var data := BattleActions.get_action_data(action_item)
-		_print_debug("Processing Action: %s - %s" % [type, data])
-
+		var handler := BattleActionHandler.get_battle_action_handler(type)
+		if handler:
+			handler.handle_as_client(self, data)
+			_print_debug("Processing Action: %s - %s" % [type, data])
+		else:
+			_print_debug("Processing and [INVALID!] Action: %s - %s" % [type, data])
 func handle_action_batch(batch: Dictionary) -> void:
 	var list := BattleActions.get_batch_list(batch)
 	var animation := BattleActions.get_batch_animation(batch)

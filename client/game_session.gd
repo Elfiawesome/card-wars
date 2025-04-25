@@ -20,6 +20,8 @@ func _ready() -> void:
 	network_connection.packet_received.connect(_on_handle_data)
 	add_child(network_connection)
 	network_connection.connect_to_server("127.0.0.1", 3115, Global.username)
+	
+	battle_view.network_connection = network_connection
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
@@ -37,7 +39,6 @@ func _on_handle_data(type: String, data: Array) -> void:
 	var handler := PacketHandlerClient.get_handler(type)
 	if !handler: return
 	handler.run(self, data)
-
 
 class NetworkConnectionBase extends Node:
 	var username: String

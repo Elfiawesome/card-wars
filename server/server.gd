@@ -32,7 +32,8 @@ func take_client_connection(client: ClientBase) -> void:
 	add_child(client)
 
 func _on_client_handle_data(type: String, data: Array, client: ClientBase) -> void:
-	print("Server packet: " + type + " -> " +str(data) + " {" + str(client.id) + "}")
+	# TODO: Uncomment this later for debugging too
+	#print("Server packet: " + type + " -> " +str(data) + " {" + str(client.id) + "}")
 	var handler := PacketHandlerServer.get_handler(type)
 	if !handler: return
 	handler.run(self, client, data)
@@ -58,6 +59,7 @@ class NetworkBus extends RefCounted:
 class ClientBase extends Node:
 	signal packet_received(type: String, data: Array)
 	
+	var battle_id: String = ""
 	var state: State = State.NONE
 	var id: String
 	

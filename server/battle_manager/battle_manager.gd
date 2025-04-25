@@ -8,7 +8,11 @@ func create_battle() -> BattleLogic:
 	var battle := BattleLogic.new(network_bus)
 	add_child(battle)
 	battle.name = battle_id
+	battle.id = battle_id
 	_battles[battle_id] = battle
 	return battle
+
+func get_battle(battle_id: String) -> BattleLogic:
+	return _battles.get(battle_id, null)
 
 func generate_battle_id() -> String: return UUID.v4()

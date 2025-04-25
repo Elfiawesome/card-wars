@@ -26,6 +26,7 @@ func run(server: Server, client: Server.ClientBase, data: Array) -> void:
 		battle = server.battle_manager.create_battle()
 	else:
 		battle = server.battle_manager._battles.get(server.battle_manager._battles.keys()[0])
+	client.battle_id = battle.id
 	
 	# Add client id into the connected clients for networking broadcasting
 	var player := battle.PlayerInstance.new(battle.generate_id(), battle)
@@ -34,14 +35,12 @@ func run(server: Server, client: Server.ClientBase, data: Array) -> void:
 	battle.player_order.push_back(player.id)
 	# Add client id into the connected clients for networking broadcasting
 	battle.connected_clients.push_back(client.id)
+	battle.client_to_player_instance[client.id] = player.id
 	
 	# Send this player into a battle
 	client.send_data("activate_battle_view", [])
 	
-	battle.commit_intent("create_battlefield", {
-		"controlling_players": [],
-		"heroes": []
-	})
+	battle.commit_intent("advance_turn")
 
 func validate_data(data: Array) -> bool:
 	if data.size() != 1: return false

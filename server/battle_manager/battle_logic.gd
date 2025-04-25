@@ -1,14 +1,26 @@
 class_name BattleLogic extends Node
 
+var id: String
 var network_bus: Server.NetworkBus
 var connected_clients: Array = []
+var client_to_player_instance: Dictionary[String, String] = {}
+
 var intent_queue: Array[BattleIntent] = []
 var current_intent: BattleIntent
+
 var global_battle_event_bus: EventBus = EventBus.new()
+
 var player_instance: Dictionary[String, PlayerInstance] = {}
+var player_response_limited: bool = false
+var allowed_player_responses: Array[String] = []
+
 var battlefields: Dictionary[String, Battlefield] = {}
 var unit_slots: Dictionary[String, UnitSlot] = {}
+
+enum Phase { None = 0, Setup, Attacking, Resolve }
 var player_order: Array[String] = []
+var current_turn: int = 0
+var current_phase: Phase = Phase.None
 
 func _init(network_bus_: Server.NetworkBus) -> void:
 	network_bus = network_bus_
@@ -31,6 +43,17 @@ func create_unit_slot() -> String:
 func get_unit_slot(unit_slot_id: String) -> UnitSlot: return unit_slots.get(unit_slot_id)
 
 func generate_id() -> String: return UUID.v4()
+
+func _handle_response(client_id: String, response_data: Array) -> void:
+	var player_instance_id: String = client_to_player_instance.get(client_id, "")
+	if player_instance_id == "": return
+	if !(player_instance_id in player_instance): return
+	var player: PlayerInstance = player_instance[player_instance_id]
+	if response_data.size() < 1: return
+	var response_type :String = response_data[0]
+	match response_type:
+		"end_turn":
+			commit_intent("advance_turn")
 
 # Intent & Action Item
 func _handle_intent_queue() -> void:
