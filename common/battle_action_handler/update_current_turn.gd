@@ -11,7 +11,8 @@ func handle_as_server(battle_logic: BattleLogic, action_data: Dictionary) -> Dic
 	var turn: int = action_data.get("Turn", -1)
 	var phase: int = action_data.get("Phase", -1)
 	battle_logic.current_turn = turn
-	battle_logic.current_phase = phase
+	battle_logic.current_phase = phase as BattleLogic.Phase
+	
 	
 	var current_turn_of_player_id := battle_logic.player_order[battle_logic.current_turn]
 	

@@ -38,6 +38,9 @@ func _on_client_handle_data(type: String, data: Array, client: ClientBase) -> vo
 	if !handler: return
 	handler.run(self, client, data)
 
+func add_clients_to_battle() -> void:
+	pass
+
 class NetworkBus extends RefCounted:
 	var server: Server
 	func _init(server_: Server) -> void:

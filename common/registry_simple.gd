@@ -8,9 +8,6 @@ func _init() -> void:
 func get_object(name: String) -> Object:
 	return _map.get(name)
 
-# TODO: WARNING: remove all instances of _register and register them manually on release
-# Unless I want the game to be moddable which would be kinda cool i guess
-# EDIT: Nah nevermind i think i want this
 func register_all_objects_in_folder(folder: String, instance_load_type: int = 0) -> void:
 	for file_path in ResourceLoader.list_directory(folder):
 		var id := file_path.split(".")[0]

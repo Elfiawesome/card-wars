@@ -8,7 +8,7 @@ var client_to_player_instance: Dictionary[String, String] = {}
 var intent_queue: Array[BattleIntent] = []
 var current_intent: BattleIntent
 
-var global_battle_event_bus: EventBus = EventBus.new()
+var global_event_bus: EventBus = EventBus.new()
 
 var player_instance: Dictionary[String, PlayerInstance] = {}
 var player_response_limited: bool = false
@@ -128,7 +128,7 @@ class Battlefield extends Base:
 	var heroes: Array[String] = []
 class UnitSlot extends Base:
 	var battlefield_id: String
-	var coords: Array[int] = []
+	var coords: Vector2i = Vector2i.ZERO
 class Unit extends Base:
 	pass
 class Hero extends Base:

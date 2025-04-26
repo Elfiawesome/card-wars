@@ -18,7 +18,7 @@ func handle_as_server(battle_logic: BattleLogic, action_data: Dictionary) -> Dic
 			var unit_slot := battle_logic.get_unit_slot(unit_slot_id)
 			if unit_slot:
 				unit_slot.battlefield_id = battlefield_id
-				unit_slot.coords = [row_index, col_index]
+				unit_slot.coords = Vector2i(row_index, col_index)
 	
 	var battlefield := battle_logic.get_battlefield(battlefield_id)
 	battlefield.unit_slots = unit_slot_layout
