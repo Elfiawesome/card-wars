@@ -1,9 +1,18 @@
 extends BattleActionHandler
 
 func handle_as_client(battle_view: BattleView, action_data: Dictionary) -> void:
+	var phase_names := {
+		-1: "No Key",
+		BattleLogic.Phase.None: "None",
+		BattleLogic.Phase.Setup: "Setup",
+		BattleLogic.Phase.Attacking: "Attacking",
+		BattleLogic.Phase.Resolve: "Resolve",
+	}
+	
+	
 	battle_view.debug_label.text = (
 		"Turn: " + str(action_data.get("Turn", -1)) +
-		"\nPhase: " + str(action_data.get("Phase", -1)) + 
+		"\nPhase: " + str(phase_names.get(action_data.get("Phase", -1), "Unkown")) + 
 		"\nPlayer Id: " + str(action_data.get("PlayerID", ""))
 	)
 

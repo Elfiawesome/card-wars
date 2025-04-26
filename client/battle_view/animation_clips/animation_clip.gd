@@ -38,7 +38,7 @@ func proceess_animation(_delta: float) -> void:
 
 func proceess_animation_burst() -> void:
 	match stage:
-		0: pass
+		0: trigger_end()
 
 func advance_stage() -> void:
 	stage += 1
