@@ -3,63 +3,41 @@ class_name BattleView extends CanvasLayer
 @onready var debug_label: Label = $Panel/DebugLabel
 
 var network_connection: GameSession.NetworkConnectionBase
-var action_item_queue: Array[Dictionary] = []
-var animation_clip_queue: Array[AnimationClip] = []
+
+var root_action_resolver: BattleActionBatchResolver = BattleActionBatchResolver.new()
+
+var battlefield_containers: Dictionary[String, BattlefieldContainer] = {}
+var unit_slot_containers: Dictionary[String, UnitSlotContainer] = {}
 
 func _ready() -> void:
-	pass
+	add_child(root_action_resolver)
+	root_action_resolver.name = "RootActionResolver"
+	root_action_resolver.process_action.connect(_handle_action)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_ENTER:
 			network_connection.send_data("battle_response", ["end_turn"])
 
-func _process(_delta: float) -> void:
-	if !action_item_queue.is_empty():
-		var action_item: Dictionary = action_item_queue.pop_front()
-		handle_action_item(action_item)
-func handle_action_item(action_item: Dictionary) -> void:
-	var block := BattleActions.get_item_block_type(action_item)
-	if block == BattleActions.BLOCK_TYPE.BATCH:
-		handle_action_batch(action_item)
-	elif block == BattleActions.BLOCK_TYPE.ACTION:
-		var type := BattleActions.get_action_type(action_item)
-		var data := BattleActions.get_action_data(action_item)
-		var handler := BattleActionHandler.get_battle_action_handler(type)
-		if handler:
-			handler.handle_as_client(self, data)
-			_print_debug("Processing Action: %s - %s" % [type, data])
-		else:
-			_print_debug("Processing and [INVALID!] Action: %s - %s" % [type, data])
-func handle_action_batch(batch: Dictionary) -> void:
-	var list := BattleActions.get_batch_list(batch)
-	var animation := BattleActions.get_batch_animation(batch)
-	var animation_type := BattleActions.get_animation_type(animation)
-	var animation_args := BattleActions.get_animation_args(animation)
-	
-	# Create a new animation clip
-	var animation_clip := AnimationClip.get_animation_clip(animation_type)
-	animation_clip.action_list = list
-	animation_clip.args = animation_args
-	animation_clip.trigger_keyframe.connect(handle_action_item)
-	animation_clip.trigger_end.connect(
-		func() -> void:
-			animation_clip_queue.remove_at(animation_clip_queue.size()-1)
-			if animation_clip_queue.size() > 0:
-				animation_clip_queue[-1].start()
-	)
-	add_child(animation_clip)
-	animation_clip_queue.push_back(animation_clip)
-	
-	# Pause the previous batch in favour of this new one first
-	if animation_clip_queue.size() > 1: animation_clip_queue[-2]._paused = true
-	
-	animation_clip.start()
+func create_battlefield_container(battlefield_id: String) -> BattlefieldContainer:
+	var scene := preload("res://client/battle_view/battlefield_container.tscn")
+	var battlefield_container := scene.instantiate()
+	battlefield_container.id = battlefield_id
+	battlefield_containers[battlefield_id] = battlefield_container
+	return battlefield_container
+func create_unit_slot_container(unit_slot_id: String) -> UnitSlotContainer:
+	var scene := preload("res://client/battle_view/unit_slot_container.tscn")
+	var unit_slot_container := scene.instantiate()
+	unit_slot_container.id = unit_slot_id
+	unit_slot_containers[unit_slot_id] = unit_slot_container
+	return unit_slot_container
 
-
-
-var _indent_size: int = 0
-func _print_debug(msg: String, indent_change:int = 0, before: bool = true) -> void:
-	if before: _indent_size += indent_change
-	print("[%s]: %s%s" % [Time.get_ticks_usec(), "    ".repeat(max(_indent_size, 0)), msg])
-	if !before: _indent_size += indent_change
+func _handle_action(action: Dictionary) -> void:
+	var type := BattleActions.get_action_type(action)
+	var data := BattleActions.get_action_data(action)
+	var handler := BattleActionHandler.get_battle_action_handler(type)
+	if handler:
+		print("Processing Action: %s - %s" % [type, data])
+		handler.handle_as_client(self, data)
+	else:
+		print("Processing and [INVALID!] Action: %s - %s" % [type, data])

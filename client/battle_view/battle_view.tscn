@@ -1,20 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://4h2msi18pfcj"]
+[gd_scene load_steps=2 format=3 uid="uid://4h2msi18pfcj"]
 
 [ext_resource type="Script" uid="uid://x4k3u56852hk" path="res://client/battle_view/battle_view.gd" id="1_cw8vw"]
-[ext_resource type="PackedScene" uid="uid://p75ps8k7qwxh" path="res://client/battle_view/battlefield_container.tscn" id="3_cm14u"]
 
 [node name="BattleView" type="CanvasLayer"]
 script = ExtResource("1_cw8vw")
 
 [node name="Panel" type="Panel" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -30,5 +21,3 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="BattlefieldContainer" parent="." instance=ExtResource("3_cm14u")]

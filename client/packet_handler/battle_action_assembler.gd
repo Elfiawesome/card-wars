@@ -33,4 +33,6 @@ func run(game: GameSession, data: Array) -> void:
 
 
 func handle_action_item(game: GameSession, action_item: Dictionary) -> void:
-	game.battle_view.action_item_queue.push_back(action_item)
+	game.battle_view.root_action_resolver.list.push_back(action_item)
+	if !game.battle_view.root_action_resolver._is_active:
+		game.battle_view.root_action_resolver.start()

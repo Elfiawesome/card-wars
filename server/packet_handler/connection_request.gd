@@ -40,7 +40,7 @@ func run(server: Server, client: Server.ClientBase, data: Array) -> void:
 	# Send this player into a battle
 	client.send_data("activate_battle_view", [])
 	
-	if battle.player_instance.size() == 4:
+	if battle.player_instance.size() == 1:
 		battle.commit_intent("advance_turn")
 
 func validate_data(data: Array) -> bool:

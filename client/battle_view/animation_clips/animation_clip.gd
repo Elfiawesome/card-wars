@@ -1,60 +1,68 @@
 class_name AnimationClip extends Node
 
-signal trigger_keyframe(action_item: Dictionary)
-signal trigger_end()
-
-var _paused: bool = true
-var _has_ended: bool = false
-var action_list: Array = []
-var stage: int = 0
-var args: Dictionary
+signal keyframe_triggered()
+signal end_triggered()
 
 static var REGISTRY := RegistrySimple.new()
 
 static func register() -> void:
 	REGISTRY.register_all_objects_in_folder("res://client/battle_view/animation_clips/")
 
-static func get_animation_clip(animation_clip_type: String) -> AnimationClip:
-	var gdscript: GDScript = REGISTRY.get_object(animation_clip_type)
+static func get_animation_clip(animation_type: String, animation_args: Dictionary = {}) -> AnimationClip:
+	var gdscript: GDScript = REGISTRY.get_object(animation_type)
+	var animation_clip: AnimationClip
 	if gdscript:
-		return gdscript.new()
-	return AnimationClip.new()
+		animation_clip = gdscript.new() as AnimationClip
+	else:
+		animation_clip = AnimationClip.new()
+	animation_clip.args = animation_args
+	return animation_clip
 
-func _init() -> void:
-	pass
+var args: Dictionary
+var _is_paused: bool = false
+# TODO: Skip per batch and skip whole batch and parent batches
+var _is_skipping: bool = false
+var stage: int = 0
 
 func start() -> void:
-	_paused = false
-	if !_has_ended:
-		_process_animation_burst()
+	_is_paused = false
+	proceess_animation_burst()
 
 func _process(delta: float) -> void:
-	if _paused or _has_ended: return
-	_process_animation(delta)
+	if _is_paused: return
+	proceess_animation(delta)
 
-func _process_animation_burst() -> void:
-	animation_end()
-
-func _process_animation(_delta: float) -> void:
+func proceess_animation(_delta: float) -> void:
 	match stage:
 		0: pass
 
-func advance_stage() -> void: 
+func proceess_animation_burst() -> void:
+	match stage:
+		0: pass
+
+func advance_stage() -> void:
 	stage += 1
-	if !_paused && !_has_ended: _process_animation_burst()
+	if _is_paused: return
+	proceess_animation_burst()
 
-func animation_keyframe() -> void:
-	if action_list.size() > 0:
-		var action: Dictionary = action_list.pop_front()
-		trigger_keyframe.emit(action)
+func pause() -> void:
+	_is_paused = true
 
-func animation_end() -> void:
-	while action_list.size() > 0:
-		if _paused:
-			break
-		animation_keyframe()
-	
-	if _paused or _has_ended: return
-	_has_ended = true
-	trigger_end.emit()
+func resume() -> void:
+	_is_paused = false
+	proceess_animation_burst()
+
+func skip() -> void:
+	if _is_skipping: return # Already skipping
+	_is_skipping = true
+	trigger_end()
+
+func stop() -> void:
+	pass
+
+func trigger_keyframe() -> void: keyframe_triggered.emit()
+
+func trigger_end() -> void:
+	end_triggered.emit()
+	stop()
 	queue_free()

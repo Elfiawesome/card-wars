@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://d4h0ovvhj3vbe"]
 
-[ext_resource type="Script" uid="uid://bmamwxe52vmd7" path="res://client/battle_view/unit_slot.gd" id="1_uhte1"]
-[ext_resource type="Texture2D" uid="uid://vjck64tis1j" path="res://asset/Destiny2_Atheon.png" id="2_ma17h"]
+[ext_resource type="Script" uid="uid://bmamwxe52vmd7" path="res://client/battle_view/unit_slot_container.gd" id="1_53lhl"]
+[ext_resource type="Texture2D" uid="uid://vjck64tis1j" path="res://asset/Destiny2_Atheon.png" id="2_bmw5a"]
 
-[node name="UnitSlot" type="Control"]
+[node name="UnitSlotContainer" type="Control"]
 custom_minimum_size = Vector2(210.5, 318)
 layout_mode = 3
 anchors_preset = 8
@@ -17,15 +17,14 @@ offset_right = 105.25
 offset_bottom = 159.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_uhte1")
+script = ExtResource("1_53lhl")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_ma17h")
+texture = ExtResource("2_bmw5a")
 expand_mode = 3
