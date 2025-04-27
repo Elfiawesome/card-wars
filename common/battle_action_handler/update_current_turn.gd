@@ -9,7 +9,6 @@ func handle_as_client(battle_view: BattleView, action_data: Dictionary) -> void:
 		BattleLogic.Phase.Resolve: "Resolve",
 	}
 	
-	
 	battle_view.debug_label.text = (
 		"Turn: " + str(action_data.get("Turn", -1)) +
 		"\nPhase: " + str(phase_names.get(action_data.get("Phase", -1), "Unkown")) + 

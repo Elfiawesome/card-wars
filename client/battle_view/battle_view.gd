@@ -1,6 +1,6 @@
 class_name BattleView extends CanvasLayer
 
-@onready var debug_label: Label = $Panel/DebugLabel
+@onready var debug_label: Label = $DebugLabel
 
 var network_connection: GameSession.NetworkConnectionBase
 
@@ -25,12 +25,14 @@ func create_battlefield_container(battlefield_id: String) -> BattlefieldContaine
 	battlefield_container.id = battlefield_id
 	battlefield_containers[battlefield_id] = battlefield_container
 	return battlefield_container
+func get_battlefield_container(battlefield_id: String) -> BattlefieldContainer: return battlefield_containers.get(battlefield_id)
 func create_unit_slot_container(unit_slot_id: String) -> UnitSlotContainer:
 	var scene := preload("res://client/battle_view/unit_slot_container.tscn")
 	var unit_slot_container := scene.instantiate()
 	unit_slot_container.id = unit_slot_id
 	unit_slot_containers[unit_slot_id] = unit_slot_container
 	return unit_slot_container
+func get_unit_slot_container(unit_slot_id: String) -> UnitSlotContainer: return unit_slot_containers.get(unit_slot_id)
 
 func _handle_action(action: Dictionary) -> void:
 	var type := BattleActions.get_action_type(action)

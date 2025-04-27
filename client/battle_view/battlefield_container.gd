@@ -8,8 +8,3 @@ var scene := preload("res://client/battle_view/unit_slot_container.tscn")
 
 func _ready() -> void:
 	pass
-
-func add_unit_slot_container(coords: Vector2i) -> void:
-	var unit_slot_container: UnitSlotContainer = scene.instantiate()
-	add_child(unit_slot_container)
-	unit_slot_container.position = coords * 100
