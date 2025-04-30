@@ -3,17 +3,17 @@ extends BattleIntent
 func run() -> void:
 	var battlefield_id: String = battle_logic.commit_action(BattleActions.create_action("create_battlefield")).get("id", "")
 	if !battlefield_id: return
-	var unit_slot_layout: Array[Array] = [["#","#","#"],[" ","#"," "]]
+	var unit_slot_layout: Array[Vector2i] = [
+		Vector2i(-1,0),
+		Vector2i(0,0),
+		Vector2i(1,0),
+		Vector2i(0,1)
+	]
 	
-	for row_index in unit_slot_layout.size():
-		var row := unit_slot_layout[row_index]
-		var new_row: Array[String] = []
-		for cell_index in row.size():
-			var cell: String = row[cell_index]
-			if (cell != " ") && (cell != ""):
-				var unit_slot_id: String = battle_logic.commit_action(BattleActions.create_action("create_unit_slot")).get("id", "")
-				unit_slot_layout[row_index][cell_index] = unit_slot_id
-			else:
-				new_row.push_back("")
+	for unit_position in unit_slot_layout:
+		battle_logic.commit_action(BattleActions.create_action("create_unit_slot", {
+			"battlefield_id": battlefield_id,
+			"unit_position": unit_position
+		}))
 	
 	complete_intent()
