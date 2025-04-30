@@ -1,11 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ceapc6u02bpj4"]
+[gd_scene load_steps=4 format=3 uid="uid://ceapc6u02bpj4"]
 
 [ext_resource type="Script" uid="uid://b18xg6x6s3fgu" path="res://client/game_session.gd" id="1_ib635"]
 [ext_resource type="PackedScene" uid="uid://4h2msi18pfcj" path="res://client/battle_view/battle_view.tscn" id="2_4pem7"]
 [ext_resource type="PackedScene" uid="uid://bm1tv2o3r5goq" path="res://client/world_view/world_view.tscn" id="3_cqi2t"]
-[ext_resource type="Texture2D" uid="uid://vjck64tis1j" path="res://asset/Destiny2_Atheon.png" id="4_aoi66"]
 
-[node name="GameSession" type="CanvasLayer"]
+[node name="GameSession" type="Node"]
 script = ExtResource("1_ib635")
 
 [node name="BattleView" parent="." instance=ExtResource("2_4pem7")]
@@ -14,7 +13,9 @@ visible = false
 [node name="WorldView" parent="." instance=ExtResource("3_cqi2t")]
 visible = false
 
-[node name="DisconnectPanel" type="Panel" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DisconnectPanel" type="Panel" parent="CanvasLayer"]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,7 +23,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="DisconnectPanel"]
+[node name="Label" type="Label" parent="CanvasLayer/DisconnectPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,115 +33,3 @@ grow_vertical = 2
 text = "Disconnected"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="UI"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-visible = false
-offset_left = 182.0
-offset_top = -24.0
-offset_right = 538.0
-offset_bottom = 504.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 20
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(168.4, 254.4)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/MarginContainer/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_aoi66")
-expand_mode = 1
-
-[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer/MarginContainer3"]
-custom_minimum_size = Vector2(168.4, 254.4)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/MarginContainer3/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_aoi66")
-expand_mode = 1
-
-[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer/MarginContainer4"]
-custom_minimum_size = Vector2(168.4, 254.4)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/MarginContainer4/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_aoi66")
-expand_mode = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer2/MarginContainer"]
-custom_minimum_size = Vector2(168.4, 254.4)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer2/MarginContainer/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_aoi66")
-expand_mode = 1

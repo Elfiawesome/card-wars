@@ -1,9 +1,9 @@
-class_name GameSession extends CanvasLayer
+class_name GameSession extends Node
 
 var network_connection: NetworkConnectionBase
 
-@onready var disconnect_panel: Panel = $DisconnectPanel
-@onready var disconnect_label: Label = $DisconnectPanel/Label
+@onready var disconnect_panel: Panel = $CanvasLayer/DisconnectPanel
+@onready var disconnect_label: Label = $CanvasLayer/DisconnectPanel/Label
 
 @onready var battle_view: BattleView = $BattleView
 @onready var world_view: Node3D = $WorldView
@@ -28,10 +28,6 @@ func _input(event: InputEvent) -> void:
 		if event.pressed and event.keycode == KEY_Q:
 			# Do nothing
 			pass
-
-func _process(_delta: float) -> void:
-	if network_connection:
-		$UI/Label.text = "Status: %s" % network_connection.get_status()
 
 func _on_handle_data(type: String, data: Array) -> void:
 	# TODO: Uncomment later

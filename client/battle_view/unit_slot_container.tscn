@@ -9,6 +9,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 210.5
 offset_bottom = 318.0
+pivot_offset = Vector2(105.25, 159)
 script = ExtResource("1_53lhl")
 
 [node name="TextureRect" type="TextureRect" parent="."]

@@ -1,5 +1,6 @@
 class_name BattleLogic extends Node
 
+# Networking
 var id: String
 var network_bus: Server.NetworkBus
 var connected_clients: Array = []
@@ -10,6 +11,7 @@ var current_intent: BattleIntent
 
 var global_event_bus: EventBus = EventBus.new()
 
+# PlayerInstance is a player that can be AI/Player/etc
 var player_instance: Dictionary[String, PlayerInstance] = {}
 var player_response_limited: bool = false
 var allowed_player_responses: Array[String] = []
@@ -55,6 +57,7 @@ func _handle_response(client_id: String, response_data: Array) -> void:
 	# Handlers without limit response
 	match response_type:
 		"do_somehting": pass
+		"please_setup_game :)": commit_intent("advance_turn")
 	
 	# Handlers with limit response
 	if player_response_limited:
