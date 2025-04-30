@@ -124,8 +124,9 @@ class Base:
 class PlayerInstance extends Base:
 	var client_id: String
 class Battlefield extends Base:
-	var unit_slots: Array[Array] = []
+	var unit_slots := GridArray.new()
 	var heroes: Array[String] = []
+
 class UnitSlot extends Base:
 	var battlefield_id: String
 	var coords: Vector2i = Vector2i.ZERO
