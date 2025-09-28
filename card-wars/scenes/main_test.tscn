@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://xqkrht51y0bd"]
+
+[ext_resource type="Script" uid="uid://capi0eqklyutk" path="res://scenes/MainTest.cs" id="1_pmgw1"]
+[ext_resource type="Script" uid="uid://cdkgmdllbgg1x" path="res://scenes/control_display_panel.gd" id="2_0s8vl"]
+
+[node name="MainTest" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pmgw1")
+
+[node name="ControlDisplayPanel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_0s8vl")
+
+[node name="Label" type="Label" parent="ControlDisplayPanel"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 23.0

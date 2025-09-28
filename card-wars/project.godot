@@ -1,0 +1,25 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Card Wars"
+run/main_scene="uid://xqkrht51y0bd"
+config/features=PackedStringArray("4.5", "C#", "Forward Plus")
+config/icon="uid://bwodyt63jkttc"
+
+[autoload]
+
+Global="*res://scenes/global/Global.cs"
+
+[dotnet]
+
+project/assembly_name="CardWars"
+project/solution_directory="../"
