@@ -6,4 +6,5 @@ public class EntityContainer
 	public Dictionary<Guid, Battlefield> Battlefields = [];
 	public Dictionary<Guid, UnitSlot> UnitSlots = [];
 	public Dictionary<Guid, UnitCard> UnitCards = [];
+	public Dictionary<Guid, Deck> Decks = [];
 }

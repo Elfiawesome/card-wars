@@ -12,10 +12,13 @@ public class GameActionHandlerContainer : DataHandlerReturnContainer<BattleEngin
 		RegisterHandler<AdvanceTurnOrderAction, AdvanceTurnOrderHandler>();
 
 		RegisterHandler<AttachBattlefieldToPlayerAction, AttachBattlefieldToPlayerHandler>();
+		RegisterHandler<AttachDeckToPlayerAction, AttachDeckToPlayerHandler>();
+		RegisterHandler<AttachUnitSlotToBattlefieldAction, AttachUnitSlotToBattlefieldHandler>();
 
 		RegisterHandler<InstantiateBattlefieldAction, InstantiateBattlefieldHandler>();
 		RegisterHandler<InstantiatePlayerAction, InstantiatePlayerHandler>();
 		RegisterHandler<InstantiateUnitCardAction, InstantiateUnitCardHandler>();
 		RegisterHandler<InstantiateUnitSlotAction, InstantiateUnitSlotHandler>();
+		RegisterHandler<InstantiateDeckAction, InstantiateDeckHandler>();
 	}
 }

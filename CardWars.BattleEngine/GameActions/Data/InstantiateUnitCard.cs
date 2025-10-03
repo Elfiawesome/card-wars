@@ -2,9 +2,9 @@ using CardWars.BattleEngine.Entities;
 
 namespace CardWars.BattleEngine.GameActions.Data;
 
-public class InstantiateUnitCardAction : GameAction
+public class InstantiateUnitCardAction(Guid id) : GameAction
 {
-	public Guid Id { get; set; }
+	public Guid Id { get; set; } = id;
 }
 
 internal class InstantiateUnitCardHandler : IGameActionHandler<InstantiateUnitCardAction>

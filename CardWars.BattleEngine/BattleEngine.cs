@@ -28,6 +28,7 @@ public class BattleEngine
 	{
 		var playerId = Guid.NewGuid();
 		QueueResolver(new PlayerJoinedResolver() { playerId = playerId });
+		QueueResolver(new CreateBattlefieldResolver(Guid.NewGuid(), playerId));
 		return playerId;
 	}
 

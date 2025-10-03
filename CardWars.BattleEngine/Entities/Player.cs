@@ -5,4 +5,7 @@ public class Player(EntityContainer container, Guid id) : Entity<Guid>(container
 	public string Name = "Default Name";
 	public HashSet<Battlefield> Battlefields = [];
 	public HashSet<UnitCard> HandCards = [];
+	public HashSet<Deck> Decks = [];
 }
+
+public record struct PlayerId(Guid Id);

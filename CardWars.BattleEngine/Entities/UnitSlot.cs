@@ -5,3 +5,5 @@ public class UnitSlot(EntityContainer container, Guid id) : Entity<Guid>(contain
 	public Battlefield? ParentBattlefield;
 	public UnitCard? HoldingUnit;
 }
+
+public record struct UnitSlotId(Guid Id);

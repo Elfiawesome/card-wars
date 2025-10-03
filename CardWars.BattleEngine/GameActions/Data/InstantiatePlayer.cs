@@ -1,11 +1,10 @@
 using CardWars.BattleEngine.Entities;
-using CardWars.BattleEngine.Resolvers;
 
 namespace CardWars.BattleEngine.GameActions.Data;
 
-public class InstantiatePlayerAction : GameAction
+public class 	InstantiatePlayerAction(Guid id) : GameAction
 {
-	public Guid Id { get; set; }
+	public Guid Id { get; set; } = id;
 }
 
 internal class InstantiatePlayerHandler : IGameActionHandler<InstantiatePlayerAction>

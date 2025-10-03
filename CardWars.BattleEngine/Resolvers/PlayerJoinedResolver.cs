@@ -9,7 +9,7 @@ public class PlayerJoinedResolver : Resolver
 	public override void Resolve(BattleEngine engine)
 	{
 		GameActionBatch gameActionBatch = new();
-		gameActionBatch.Actions.Add(new InstantiatePlayerAction() { Id = playerId });
+		gameActionBatch.Actions.Add(new InstantiatePlayerAction(playerId));
 
 		if (engine.PlayerOrder.Count == 0)
 		{

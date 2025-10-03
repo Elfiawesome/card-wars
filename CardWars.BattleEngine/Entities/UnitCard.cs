@@ -5,3 +5,5 @@ public class UnitCard(EntityContainer container, Guid id) : Entity<Guid>(contain
 	public bool IsPlayed => ParentUnitSlot != null;
 	public UnitSlot? ParentUnitSlot;
 }
+
+public record struct UnitCardId(Guid Id);

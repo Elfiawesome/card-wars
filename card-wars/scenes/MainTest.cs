@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CardWars.BattleEngine;
 using CardWars.BattleEngine.Inputs.Data;
-using CardWars.BattleEngine.Resolvers;
 using Godot;
 
 namespace Cardwars;
@@ -25,7 +23,8 @@ public partial class MainTest : Control
 		var myId2 = GameEngine.AddPlayer();
 		var myId3 = GameEngine.AddPlayer();
 		GameEngine.HandleInput(myId, new EndTurnInput());
-		GameEngine.HandleInput(myId, new EndTurnInput());
+		// GameEngine.HandleInput(myId2, new EndTurnInput());
+		// GameEngine.HandleInput(myId3, new EndTurnInput());
 	}
 
 	public override void _Process(double delta)
@@ -33,7 +32,7 @@ public partial class MainTest : Control
 		if (GameEngine == null) { return; }
 		string data = "";
 
-		data += "TurnNumber: " + GameEngine.TurnOrderIndex + "\n";
+		data += "[TurnNumber: " + GameEngine.TurnOrderIndex + "]\n";
 		foreach (var playerId in GameEngine.PlayerOrder)
 		{
 			var entity = GameEngine.Entities.Players[playerId];
@@ -45,8 +44,21 @@ public partial class MainTest : Control
 			{
 				data += $"   Player {playerId}\n";
 			}
+			foreach (var deck in entity.Decks)
+			{
+				data += $"      Deck {deck.Id}\n";
+			}
 		}
 
+		data += "\n[Battlefields]:\n";
+		foreach (var item in GameEngine.Entities.Battlefields)
+		{
+			data += $"   {item.Key}\n";
+			foreach (var slotItem in item.Value.Slots)
+			{
+				data += $"      {slotItem.Id}\n";
+			}
+		}
 		GetNode<Label>("ControlDisplayPanel/Label").Text = data;
 	}
 

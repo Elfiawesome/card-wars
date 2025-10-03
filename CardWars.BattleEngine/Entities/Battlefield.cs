@@ -4,3 +4,5 @@ public class Battlefield(EntityContainer container, Guid id) : Entity<Guid>(cont
 {
 	public HashSet<UnitSlot> Slots = [];
 }
+
+public record struct BattlefieldId(Guid Id);
