@@ -1,4 +1,4 @@
-using CardWars.BattleEngine.Core;
+using CardWars.BattleEngine.Common;
 using CardWars.BattleEngine.GameActions.Data;
 
 namespace CardWars.BattleEngine.GameActions;

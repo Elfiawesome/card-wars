@@ -1,4 +1,4 @@
-namespace CardWars.BattleEngine.Core;
+namespace CardWars.BattleEngine.Common;
 
 public abstract class DataHandlerReturnContainer<TContext, TBaseData, TReturn>
 	where TBaseData : notnull

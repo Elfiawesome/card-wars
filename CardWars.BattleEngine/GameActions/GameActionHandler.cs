@@ -1,5 +1,5 @@
 using System.Reflection.Metadata;
-using CardWars.BattleEngine.Core;
+using CardWars.BattleEngine.Common;
 
 namespace CardWars.BattleEngine.GameActions;
 

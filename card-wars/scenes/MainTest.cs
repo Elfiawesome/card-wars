@@ -3,6 +3,8 @@ using CardWars.BattleEngine;
 using CardWars.BattleEngine.GameActions.Data;
 using Godot;
 
+namespace Cardwars;
+
 public partial class MainTest : Control
 {
 	public BattleEngine GameEngine;

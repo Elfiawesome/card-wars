@@ -1,4 +1,4 @@
-namespace CardWars.BattleEngine.Core;
+namespace CardWars.BattleEngine.Common;
 
 public interface IDataHandlerReturn<TContext, TData, TReturn>
 	where TData : notnull

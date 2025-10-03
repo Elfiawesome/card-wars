@@ -1,4 +1,4 @@
-using CardWars.BattleEngine.Core;
+using CardWars.BattleEngine.Common;
 using Godot;
 using System;
 
