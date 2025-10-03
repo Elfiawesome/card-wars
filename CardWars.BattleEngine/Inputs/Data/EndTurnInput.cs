@@ -2,15 +2,13 @@ using CardWars.BattleEngine.Resolvers;
 
 namespace CardWars.BattleEngine.Inputs.Data;
 
-public class EndTurnInput : IInput
-{
-}
+public record struct EndTurnInput : IInput;
 
 public class EndTurnInputHandler : IInputHandler<EndTurnInput>
 {
-	public bool Handle(BattleEngine engine, EndTurnInput data)
+	public bool Handle(InputContext context, EndTurnInput data)
 	{
-		engine.QueueResolver(new EndTurnResolver());
+		context.Engine.QueueResolver(new EndTurnResolver());
 		return true;
 	}
 }

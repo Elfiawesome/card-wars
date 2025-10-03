@@ -10,6 +10,7 @@ public class GameActionHandlerContainer : DataHandlerReturnContainer<BattleEngin
 	public override void Register()
 	{
 		RegisterHandler<AdvanceTurnOrderAction, AdvanceTurnOrderHandler>();
+		RegisterHandler<RemoveCardFromDeckAction, RemoveCardFromDeckHandler>();
 
 		RegisterHandler<AttachBattlefieldToPlayerAction, AttachBattlefieldToPlayerHandler>();
 		RegisterHandler<AttachDeckToPlayerAction, AttachDeckToPlayerHandler>();

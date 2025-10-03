@@ -38,7 +38,7 @@ public class BattleEngine
 			MyLogger.LogError($"[INPUT] {input.GetType().Name} Was not allowed from player {playerId}");
 			return;
 		}
-		var success = inputHandler.Handle(this, input);
+		var success = inputHandler.Handle(new InputContext(playerId, this), input);
 		if (!success)
 		{
 			MyLogger.LogError($"[INPUT] {input.GetType().Name} Failed");
