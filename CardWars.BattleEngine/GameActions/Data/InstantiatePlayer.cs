@@ -1,4 +1,5 @@
 using CardWars.BattleEngine.Entities;
+using CardWars.BattleEngine.Resolvers;
 
 namespace CardWars.BattleEngine.GameActions.Data;
 
@@ -11,6 +12,9 @@ internal class InstantiatePlayerHandler : IGameActionHandler<InstantiatePlayerAc
 {
 	public bool Handle(BattleEngine engine, InstantiatePlayerAction data)
 	{
-		return engine.Entities.Players.TryAdd(data.Id, new Player(engine.Entities, data.Id));
+		var success = engine.Entities.Players.TryAdd(data.Id, new Player(engine.Entities, data.Id));
+		if (!success) { return success; }
+		engine.PlayerOrder.Add(data.Id);
+		return success;
 	}
 }

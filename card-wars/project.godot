@@ -13,6 +13,7 @@ config_version=5
 config/name="Card Wars"
 run/main_scene="uid://xqkrht51y0bd"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
+boot_splash/show_image=false
 config/icon="uid://bwodyt63jkttc"
 
 [autoload]

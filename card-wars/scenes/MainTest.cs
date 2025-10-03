@@ -1,7 +1,9 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using CardWars.BattleEngine;
-using CardWars.BattleEngine.GameActions.Data;
 using CardWars.BattleEngine.Inputs.Data;
+using CardWars.BattleEngine.Resolvers;
 using Godot;
 
 namespace Cardwars;
@@ -19,10 +21,11 @@ public partial class MainTest : Control
 			// 	GD.Print(action);
 			// }
 		};
-		GameEngine.QueueGameActionBatch(new([
-			new InstantiatePlayerAction() { Id = Guid.NewGuid() },
-			new InstantiateBattlefieldAction() { Id = Guid.NewGuid() }
-		]));
+		var myId = GameEngine.AddPlayer();
+		var myId2 = GameEngine.AddPlayer();
+		var myId3 = GameEngine.AddPlayer();
+		GameEngine.HandleInput(myId, new EndTurnInput());
+		GameEngine.HandleInput(myId, new EndTurnInput());
 	}
 
 	public override void _Process(double delta)
@@ -30,32 +33,25 @@ public partial class MainTest : Control
 		if (GameEngine == null) { return; }
 		string data = "";
 
-		data += "Players:\n";
-		foreach (var item in GameEngine.Entities.Players)
+		data += "TurnNumber: " + GameEngine.TurnOrderIndex + "\n";
+		foreach (var playerId in GameEngine.PlayerOrder)
 		{
-			data += item.Key + ": " + item.Value + "\n";
+			var entity = GameEngine.Entities.Players[playerId];
+			if (playerId == GameEngine.CurrentPlayerId)
+			{
+				data += $"-> Player {playerId}\n";
+			}
+			else
+			{
+				data += $"   Player {playerId}\n";
+			}
 		}
-
-		data += "Battlefields:\n";
-		foreach (var item in GameEngine.Entities.Battlefields)
-		{
-			data += item.Key + ": " + item.Value + "\n";
-		}
-
-		data += "UnitSlots:\n";
-		foreach (var item in GameEngine.Entities.UnitSlots)
-		{
-			data += item.Key + ": " + item.Value + "\n";
-		}
-
-		data += "UnitCards:\n";
-		foreach (var item in GameEngine.Entities.UnitCards)
-		{
-			data += item.Key + ": " + item.Value + "\n";
-		}
-
 
 		GetNode<Label>("ControlDisplayPanel/Label").Text = data;
 	}
 
+	private string FormatList<T>(List<T> list)
+	{
+		return string.Join(", ", list.Select(x => x.ToString()));
+	}
 }

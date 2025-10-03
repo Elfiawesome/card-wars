@@ -9,6 +9,6 @@ public class InputHandlerContainer : DataHandlerReturnContainer<BattleEngine, II
 
 	public override void Register()
 	{
-		RegisterHandler<ExampleInput, ExampleInputHandler>();
+		RegisterHandler<EndTurnInput, EndTurnInputHandler>();
 	}
 }

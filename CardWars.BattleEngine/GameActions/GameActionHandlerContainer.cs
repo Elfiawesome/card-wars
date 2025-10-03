@@ -9,6 +9,8 @@ public class GameActionHandlerContainer : DataHandlerReturnContainer<BattleEngin
 
 	public override void Register()
 	{
+		RegisterHandler<AdvanceTurnOrderAction, AdvanceTurnOrderHandler>();
+
 		RegisterHandler<AttachBattlefieldToPlayerAction, AttachBattlefieldToPlayerHandler>();
 
 		RegisterHandler<InstantiateBattlefieldAction, InstantiateBattlefieldHandler>();
