@@ -36,13 +36,13 @@ public class BattleEngine
 	{
 		if (!AllowedPlayerInput.Contains(playerId))
 		{
-			MyLogger.Log($"[INPUT] {input.GetType().Name} Was not allowed from player {playerId}");
+			MyLogger.LogError($"[INPUT] {input.GetType().Name} Was not allowed from player {playerId}");
 			return;
 		}
 		var success = inputHandler.Handle(this, input);
 		if (!success)
 		{
-			MyLogger.Log($"[INPUT] {input.GetType().Name} Failed");
+			MyLogger.LogError($"[INPUT] {input.GetType().Name} Failed");
 		}
 		else
 		{
@@ -86,7 +86,7 @@ public class BattleEngine
 		var success = gameActionHandler.Handle(this, action);
 		if (!success)
 		{
-			MyLogger.Log($"		[ACTION] {action.GetType().Name} Failed");
+			MyLogger.LogError($"		[ACTION] {action.GetType().Name} Failed");
 		}
 		else
 		{
