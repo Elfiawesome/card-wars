@@ -1,28 +1,29 @@
+using CardWars.BattleEngine.Entities;
 using CardWars.BattleEngine.GameActions;
 using CardWars.BattleEngine.GameActions.Data;
 
 namespace CardWars.BattleEngine.Resolvers;
 
-public class CreateBattlefieldResolver(Guid battlefieldId, Guid playerId) : Resolver
+public class CreateBattlefieldResolver(BattlefieldId battlefieldId, PlayerId playerId) : Resolver
 {
-	public Guid BattlefieldId = battlefieldId;
-	public Guid PlayerId = playerId; // Used so that he can any abilities or something
+	private BattlefieldId _battlefieldId = battlefieldId;
+	private PlayerId _playerId = playerId; // Used so that he can any abilities or something
 
 	public override void Resolve(BattleEngine engine)
 	{
 		GameActionBatch batch = new();
-		batch.Actions.Add(new InstantiateBattlefieldAction(BattlefieldId));
-		batch.Actions.Add(new AttachBattlefieldToPlayerAction(BattlefieldId, PlayerId));
+		batch.Actions.Add(new InstantiateBattlefieldAction(_battlefieldId));
+		batch.Actions.Add(new AttachBattlefieldToPlayerAction(_battlefieldId, _playerId));
 		for (var i = 0; i < 4; i++)
 		{
-			var unitSlotId = Guid.NewGuid();
+			UnitSlotId unitSlotId = new(Guid.NewGuid());
 			batch.Actions.Add(new InstantiateUnitSlotAction(unitSlotId));
-			batch.Actions.Add(new AttachUnitSlotToBattlefieldAction(unitSlotId, BattlefieldId));
+			batch.Actions.Add(new AttachUnitSlotToBattlefieldAction(unitSlotId, _battlefieldId));
 		}
 
-		var deckId = Guid.NewGuid();
+		DeckId deckId = new(Guid.NewGuid());
 		batch.Actions.Add(new InstantiateDeckAction(deckId));
-		batch.Actions.Add(new AttachDeckToPlayerAction(deckId, PlayerId));
+		batch.Actions.Add(new AttachDeckToPlayerAction(deckId, _playerId));
 
 		AddBatch(batch);
 		CommitResolve();

@@ -1,6 +1,6 @@
 namespace CardWars.BattleEngine.Entities;
 
-public class UnitSlot(EntityContainer container, Guid id) : Entity<Guid>(container, id)
+public class UnitSlot(EntityContainer container, UnitSlotId id) : Entity<UnitSlotId>(container, id)
 {
 	public Battlefield? ParentBattlefield;
 	public UnitCard? HoldingUnit;

@@ -1,9 +1,11 @@
 using CardWars.BattleEngine.Common;
+using CardWars.BattleEngine.Entities;
 
 namespace CardWars.BattleEngine.GameActions.Data;
 
 public class AdvanceTurnOrderAction : GameAction
 {
+	// Used to jump to the specific index of the turn (Not the player id itself)
 	public int? SetIndex { get; set; }
 }
 
@@ -27,7 +29,7 @@ internal class AdvanceTurnOrderHandler : IGameActionHandler<AdvanceTurnOrderActi
 		engine.AllowedPlayerInput.Clear();
 		if (engine.CurrentPlayerId != null)
 		{
-			engine.AllowedPlayerInput.Add((Guid)engine.CurrentPlayerId);
+			engine.AllowedPlayerInput.Add((PlayerId)engine.CurrentPlayerId);
 		}
 		return true;
 	}

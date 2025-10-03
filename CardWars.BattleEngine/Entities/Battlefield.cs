@@ -1,6 +1,6 @@
 namespace CardWars.BattleEngine.Entities;
 
-public class Battlefield(EntityContainer container, Guid id) : Entity<Guid>(container, id)
+public class Battlefield(EntityContainer container, BattlefieldId id) : Entity<BattlefieldId>(container, id)
 {
 	public HashSet<UnitSlot> Slots = [];
 }

@@ -18,21 +18,21 @@ public class BattleEngine
 	public readonly InputHandlerContainer inputHandler = new();
 
 	public int TurnOrderIndex = 0;
-	public List<Guid> PlayerOrder = [];
-	public Guid? CurrentPlayerId => (PlayerOrder.Count == 0 && TurnOrderIndex < 0 && TurnOrderIndex >= PlayerOrder.Count) ? null : PlayerOrder[TurnOrderIndex];
-	public HashSet<Guid> AllowedPlayerInput = [];
+	public List<PlayerId> PlayerOrder = [];
+	public PlayerId? CurrentPlayerId => (PlayerOrder.Count == 0 && TurnOrderIndex < 0 && TurnOrderIndex >= PlayerOrder.Count) ? null : PlayerOrder[TurnOrderIndex];
+	public HashSet<PlayerId> AllowedPlayerInput = [];
 
 	private readonly List<Resolver> _resolverStack = [];
 
-	public Guid AddPlayer()
+	public PlayerId AddPlayer()
 	{
-		var playerId = Guid.NewGuid();
-		QueueResolver(new PlayerJoinedResolver() { playerId = playerId });
-		QueueResolver(new CreateBattlefieldResolver(Guid.NewGuid(), playerId));
+		PlayerId playerId = new(Guid.NewGuid());
+		QueueResolver(new PlayerJoinedResolver(playerId));
+		QueueResolver(new CreateBattlefieldResolver(new(Guid.NewGuid()), playerId));
 		return playerId;
 	}
 
-	public void HandleInput(Guid playerId, IInput input)
+	public void HandleInput(PlayerId playerId, IInput input)
 	{
 		if (!AllowedPlayerInput.Contains(playerId))
 		{

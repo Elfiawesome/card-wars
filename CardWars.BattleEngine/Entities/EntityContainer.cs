@@ -2,9 +2,9 @@ namespace CardWars.BattleEngine.Entities;
 
 public class EntityContainer
 {
-	public Dictionary<Guid, Player> Players = [];
-	public Dictionary<Guid, Battlefield> Battlefields = [];
-	public Dictionary<Guid, UnitSlot> UnitSlots = [];
-	public Dictionary<Guid, UnitCard> UnitCards = [];
-	public Dictionary<Guid, Deck> Decks = [];
+	public Dictionary<PlayerId, Player> Players = [];
+	public Dictionary<BattlefieldId, Battlefield> Battlefields = [];
+	public Dictionary<UnitSlotId, UnitSlot> UnitSlots = [];
+	public Dictionary<UnitCardId, UnitCard> UnitCards = [];
+	public Dictionary<DeckId, Deck> Decks = [];
 }

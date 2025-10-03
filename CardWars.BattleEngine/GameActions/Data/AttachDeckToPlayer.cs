@@ -1,11 +1,12 @@
 using CardWars.BattleEngine.Common;
+using CardWars.BattleEngine.Entities;
 
 namespace CardWars.BattleEngine.GameActions.Data;
 
-public class AttachDeckToPlayerAction(Guid deckId, Guid playerId) : GameAction
+public class AttachDeckToPlayerAction(DeckId deckId, PlayerId playerId) : GameAction
 {
-	public Guid DeckId { get; set; } = deckId;
-	public Guid PlayerId { get; set; } = playerId;
+	public DeckId DeckId { get; set; } = deckId;
+	public PlayerId PlayerId { get; set; } = playerId;
 }
 
 internal class AttachDeckToPlayerHandler : IGameActionHandler<AttachDeckToPlayerAction>

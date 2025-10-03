@@ -1,6 +1,6 @@
 namespace CardWars.BattleEngine.Entities;
 
-public class Deck(EntityContainer container, Guid id) : Entity<Guid>(container, id)
+public class Deck(EntityContainer container, DeckId id) : Entity<DeckId>(container, id)
 {
 	public string CardType = "Unit"; // | Spell
 	public List<string> CardId = [

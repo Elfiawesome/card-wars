@@ -1,9 +1,11 @@
+using CardWars.BattleEngine.Entities;
+
 namespace CardWars.BattleEngine.GameActions.Data;
 
-public class AttachBattlefieldToPlayerAction(Guid battlefieldId, Guid playerId) : GameAction
+public class AttachBattlefieldToPlayerAction(BattlefieldId battlefieldId, PlayerId playerId) : GameAction
 {
-	public Guid BattlefieldId { get; set; } = battlefieldId;
-	public Guid PlayerId { get; set; } = playerId;
+	public BattlefieldId BattlefieldId { get; set; } = battlefieldId;
+	public PlayerId PlayerId { get; set; } = playerId;
 }
 
 internal class AttachBattlefieldToPlayerHandler : IGameActionHandler<AttachBattlefieldToPlayerAction>
