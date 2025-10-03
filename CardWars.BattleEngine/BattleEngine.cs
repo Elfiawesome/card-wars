@@ -1,5 +1,6 @@
 using CardWars.BattleEngine.Common;
 using CardWars.BattleEngine.Entities;
+using CardWars.BattleEngine.Events;
 using CardWars.BattleEngine.GameActions;
 using CardWars.BattleEngine.Inputs;
 using CardWars.BattleEngine.Resolvers;
@@ -15,6 +16,7 @@ public class BattleEngine
 	public readonly EntityContainer Entities = new();
 	public readonly GameActionHandlerContainer gameActionHandler = new();
 	public readonly InputHandlerContainer inputHandler = new();
+	public readonly EventManager eventHandler = new();
 
 	public int TurnOrderIndex = 0;
 	public List<PlayerId> PlayerOrder = [];
