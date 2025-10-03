@@ -28,7 +28,7 @@ public abstract class DataHandlerReturnContainer<TContext, TBaseData, TReturn>
 		};
 	}
 
-	public TReturn? HandleActionData(TContext context, TBaseData data)
+	public TReturn? Handle(TContext context, TBaseData data)
 	{
 		var dataType = data.GetType();
 		if (_handlers.TryGetValue(dataType, out var handler))

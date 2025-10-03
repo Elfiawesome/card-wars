@@ -24,7 +24,7 @@ public abstract class DataHandlerContainer<TContext, TData>
 		};
 	}
 
-	public void HandleActionData(TContext context, TData data)
+	public void Handle(TContext context, TData data)
 	{
 		var dataType = data.GetType();
 		if (_handlers.TryGetValue(dataType, out var handler))

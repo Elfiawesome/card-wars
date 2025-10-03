@@ -1,6 +1,7 @@
 using System;
 using CardWars.BattleEngine;
 using CardWars.BattleEngine.GameActions.Data;
+using CardWars.BattleEngine.Inputs.Data;
 using Godot;
 
 namespace Cardwars;
@@ -21,7 +22,6 @@ public partial class MainTest : Control
 		GameEngine.QueueGameActionBatch(new([
 			new InstantiatePlayerAction() { Id = Guid.NewGuid() },
 			new InstantiateBattlefieldAction() { Id = Guid.NewGuid() }
-
 		]));
 	}
 

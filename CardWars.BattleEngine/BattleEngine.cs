@@ -11,9 +11,11 @@ public class BattleEngine
 
 	public readonly EntityContainer Entities = new();
 	public readonly GameActionHandlerContainer gameActionHandler = new();
+	public readonly InputHandlerContainer inputHandler = new();
 
-	public void HandleInput(IInput input)
+	public bool HandleInput(IInput input)
 	{
+		return inputHandler.Handle(this, input);
 	}
 
 	public void QueueGameActionBatch(GameActionBatch batch)
@@ -27,7 +29,7 @@ public class BattleEngine
 
 	private void HandleAction(GameAction action)
 	{
-		var success = gameActionHandler.HandleActionData(this, action);
+		var success = gameActionHandler.Handle(this, action);
 		if (!success) { MyLogger.Log($"Action {action.GetType().Name} failed"); }
 	}
 }
