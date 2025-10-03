@@ -1,4 +1,3 @@
-using CardWars.BattleEngine.Common;
 using CardWars.BattleEngine.Entities;
 
 namespace CardWars.BattleEngine.GameActions.Data;

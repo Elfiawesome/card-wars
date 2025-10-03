@@ -1,7 +1,6 @@
 using CardWars.BattleEngine.Common;
 using CardWars.BattleEngine.Entities;
 using CardWars.BattleEngine.GameActions;
-using CardWars.BattleEngine.GameActions.Data;
 using CardWars.BattleEngine.Inputs;
 using CardWars.BattleEngine.Resolvers;
 

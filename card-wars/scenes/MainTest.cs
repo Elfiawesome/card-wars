@@ -46,7 +46,7 @@ public partial class MainTest : Control
 			}
 			foreach (var deck in entity.Decks)
 			{
-				data += $"      Deck {deck.Id}\n";
+				data += $"      {deck.Id}\n";
 			}
 		}
 
